@@ -22,8 +22,7 @@ import { Component } from '@angular/core';
       <li>
         <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
       </li>
-      <<button>btnTest</button>
-      
+      <button type="button" class="btn btn-primary">Primary</button>      
     </ul>
     
   `,
