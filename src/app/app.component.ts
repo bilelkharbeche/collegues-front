@@ -13,7 +13,7 @@ import { newColl } from './mock/collegues.mock';
         <app-collegue [collegue]="newColl"></app-collegue>
       </div>      
   </div>    
-  `,
+  `, 
   styles: []
 })
 export class AppComponent {
