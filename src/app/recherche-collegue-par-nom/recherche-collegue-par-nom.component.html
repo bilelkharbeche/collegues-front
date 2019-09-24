@@ -8,8 +8,9 @@
         <div class="col"><button type="submit" class="btn btn-dark" (click)="rechercherMat()">Rechercher</button></div>
     </div>
     <div class="row"><br></div>
-    <div class="row">
-            <ng-container  *ngFor="let matricule of tabMatricules">
+    <div class="row" *ngFor="let matricule of tabMatricules">
+            <ng-container>
+                    <div class="col"></div>
                     <div class="col">{{matricule}}</div>               
             </ng-container>                    
     </div> 
