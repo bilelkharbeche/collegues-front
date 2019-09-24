@@ -3,8 +3,7 @@ import { tabMatricules } from '../mock/matricules.mock'
 
 @Component({
   selector: 'app-recherche-collegue-par-nom',
-  templateUrl: './recherche-collegue-par-nom.component.html',
-  styleUrls: ['./recherche-collegue-par-nom.component.css']
+  templateUrl: './recherche-collegue-par-nom.component.html' 
 })
 export class RechercheCollegueParNomComponent implements OnInit {
 

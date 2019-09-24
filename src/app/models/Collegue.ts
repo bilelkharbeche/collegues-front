@@ -1,6 +1,6 @@
 class Collegue {
 
-   constructor(public matricule: String, public nom: String, public prenoms: String, public email: String, public dateDeNaissance: Date, public photoUrl: String){
+   constructor(public matricule: string, public nom: string, public prenoms: string, public email: string, public dateDeNaissance: Date, public photoUrl: string){
 
    }
 }
