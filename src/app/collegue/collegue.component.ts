@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Collegue } from '../models/Collegue';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-collegue',
@@ -7,12 +8,13 @@ import { Collegue } from '../models/Collegue';
 })
 export class CollegueComponent implements OnInit {
 
-  @Input() collegue: Collegue;
+  collegue: Collegue;
   affichage: boolean = true;
 
-  constructor() { }
+  constructor(private datatService: DataService) { }
 
   ngOnInit() {
+    this.collegue = this.datatService.recupererCollegueCourant();    
   }
 
   modifColl() {
@@ -26,5 +28,6 @@ export class CollegueComponent implements OnInit {
 
   valideModif() {
     console.log("Modification validée");
+    this.affichage = true;
   }
 }

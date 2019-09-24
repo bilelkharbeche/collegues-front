@@ -10,13 +10,12 @@ import { newColl } from './mock/collegues.mock';
         <app-recherche-collegue-par-nom></app-recherche-collegue-par-nom> 
       </div>
       <div class="col">
-        <app-collegue [collegue]="newColl"></app-collegue>
+        <app-collegue></app-collegue>
       </div>      
   </div>    
   `, 
   styles: []
 })
 export class AppComponent {
-  title = 'collegues-front';
-  newColl = newColl;
+  title = 'collegues-front';  
 }
