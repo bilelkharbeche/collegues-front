@@ -1,0 +1,77 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <img src={{collegue.photoUrl}}>
+        </div>
+        <div class="col">
+            <div class="row align-items-start">
+                <div class="col">
+                    <li>Matricule : </li>
+                </div>
+                <div class="col">
+                    {{collegue.matricule}}
+                </div>
+            </div>
+            <div class="row align-items-start">
+                <div class="col">
+                    <li>Nom : </li>
+                </div>
+                <div class="col">
+                    {{collegue.nom | uppercase}}
+                </div>
+            </div>
+            <div class="row align-items-start">
+                <div class="col">
+                    <li>Prénoms : </li>
+                </div>
+                <div class="col">
+                    {{collegue.prenoms}}
+                </div>
+            </div>
+            <div class="row align-items-start">
+                <div class="col">
+                    <li>Date de naissance : </li>
+                </div>
+                <div class="col">
+                    {{collegue.dateDeNaissance | date:'dd/MM/yyyy'}}
+                </div>
+            </div>
+            <div class="row align-items-start">
+                <div class="col">
+                    <li>Email : </li>
+                </div>
+                <div class="col">
+                    <div *ngIf="affichage; else elseAffMail">{{collegue.email}}</div>
+                </div>
+            </div>
+            <div class="row align-items-start">
+                <div class="col" *ngIf="affichage; else elseAffUrl"></div>
+                <div class="col" *ngIf="affichage; else elseChampsUrl"></div>
+            </div>
+            <div class="row align-items-start">
+                <div class="col">
+                    <a *ngIf="affichage; else elseLienCreer" for="exempleCreerColl" href="#" (click)="creerColl()">Créer
+                        un collègue</a>
+                </div>
+                <div class="col">
+                    <button *ngIf="affichage; else elseBtnModif" type="button" class="btn btn-danger"
+                        (click)="modifColl()">Modifier</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <ng-template #elseAffMail><input type="email"></ng-template>
+    <ng-template #elseAffUrl>
+        <div class="col">
+            <li>Photo URL :</li>
+        </div>
+    </ng-template>
+    <ng-template #elseChampsUrl>
+        <div class="col"><input type="text"></div>
+    </ng-template>
+    <ng-template #elseLienCreer></ng-template>
+    <ng-template #elseBtnModif><button type="button" class="btn btn-danger" (click)="valideModif()">Valider</button>
+    </ng-template>
+
+</div>
