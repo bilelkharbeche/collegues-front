@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Collegue } from '../models/Collegue';
 import { DataService } from '../services/data.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-collegue',
@@ -10,11 +11,13 @@ export class CollegueComponent implements OnInit {
 
   collegue: Collegue;
   affichage: boolean = true;
+  
+  actionSub: Subscription;
 
   constructor(private datatService: DataService) { }
 
   ngOnInit() {
-    this.collegue = this.datatService.recupererCollegueCourant();    
+    this.actionSub = this.datatService.actionInfoColl.subscribe(result => this.collegue = result);
   }
 
   modifColl() {

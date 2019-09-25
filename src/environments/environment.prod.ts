@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+
+  backendUrl: 'https://kharbeche-collegues-api.herokuapp.com/'
 };

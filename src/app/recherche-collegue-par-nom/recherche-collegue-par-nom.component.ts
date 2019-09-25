@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { tabMatricules } from '../mock/matricules.mock'
-import { DataService} from '../services/data.service'
+import { DataService} from '../services/data.service';
+import { Collegue } from '../models/Collegue';
 
 @Component({
   selector: 'app-recherche-collegue-par-nom',
@@ -9,6 +9,7 @@ import { DataService} from '../services/data.service'
 export class RechercheCollegueParNomComponent implements OnInit {
 
   tabMatricules: string[] = [];
+  newColl: Collegue;
 
   constructor(private dataService: DataService) { }
 
@@ -16,7 +17,11 @@ export class RechercheCollegueParNomComponent implements OnInit {
   }
 
   rechercherMat(nom: string) {
-    this.tabMatricules = this.dataService.rechercherParNom(nom);
+   this.dataService.rechercherParNom(nom).subscribe(tab => this.tabMatricules = tab);
+  }
+
+  rechercherColl(matricule: string) {
+    this.dataService.recupererCollegueCourant(matricule).subscribe(coll => this.newColl = coll);
   }
 
 }

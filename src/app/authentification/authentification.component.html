@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="row"><br></div>
+    <div class="row">
+        <div class="col">
+            <div class="col">Email</div>
+            <div class="col"><input type="email" #email></div>
+        </div>
+        <div class="col">
+            <div class="col">Password</div>
+            <div class="col"><input type="text" #password></div>
+        </div>
+        <div class="col">
+            <div class="col"><br></div>
+            <div class="col"><button type="button" class="btn btn-info" (click)="connexion(email.value, password.value)">Connexion</button>
+            </div>
+        </div>
+    </div>
+    <div class="row"><br></div>
+</div>
