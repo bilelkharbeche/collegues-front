@@ -1,12 +1,10 @@
-<div class="container">
-    <div class="row"><br></div>
-    <div class="row">
+<div class="container">    
+    <div class="row p-2">
         <div class="col">
             <img src={{collegue.photoUrl}}>
         </div>
-        <div class="col">
-            <div class="row"><br></div>
-            <div class="row align-items-start">
+        <div class="col">            
+            <div class="row padding-top-2 align-items-start">
                 <div class="col">
                     <li>Matricule : </li>
                 </div>
@@ -45,9 +43,8 @@
                 <div class="col">
                     <div *ngIf="affichage; else elseAffMail">{{collegue.email}}</div>
                 </div>
-            </div>
-            <div class="row"><br></div>
-            <div class="row align-items-start">
+            </div>            
+            <div class="row padding-top-2 align-items-start">
                 <div class="col" *ngIf="affichage; else elseAffUrl"></div>
                 <div class="col" *ngIf="affichage; else elseChampsUrl"></div>
             </div>
@@ -61,8 +58,9 @@
                         (click)="modifColl()">Modifier</button>
                 </div>
             </div>
-        </div>
-    </div>
+        </div>               
+    </div>    
+    <div class="row padding-top-2">C'est classe de passer d'un truc mauch à ça hein ? :)<br>TAPE "KHARBECHE" OU "KHARBECHE2" DANS LA RECHERCHE !</div> 
 
     <ng-template #elseAffMail><input type="email"></ng-template>
     <ng-template #elseAffUrl>

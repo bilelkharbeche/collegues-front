@@ -49,7 +49,6 @@ export class DataService {
       httpOptions
     )
     .subscribe((data:any) => {
-      console.log(data);
       this.estConnecte.next(true);
     }, (error: HttpErrorResponse) => {
       console.log("error", error);

@@ -1,19 +1,16 @@
 <div class="container">
-    <div class="row">
-        <br>
-    </div>
+    <div class="row"><br></div>
     <div class="row">
         <div class="col">Recherche par nom</div>
         <div class="col"><input type="text" #nom></div>
         <div class="col"><button type="submit" class="btn btn-dark" (click)="rechercherMat(nom.value)">Rechercher</button></div>
-    </div>
-    <div class="row"><br></div>
-    <div class="row" *ngFor="let matricule of tabMatricules">
+    </div>    
+    <div class="row padding-top-2" *ngFor="let matricule of tabMatricules">
             <ng-container>
                     <div class="col"></div>
                     <div class="col">
                         <a href=# (click)="rechercherColl(matricule)">{{matricule}}</a>
                     </div>               
-            </ng-container>                    
+            </ng-container>                             
     </div> 
 </div>
