@@ -6,11 +6,11 @@
         <div class="col"><button type="submit" class="btn btn-dark"
                 (click)="rechercherMat(nom.value)">Rechercher</button></div>
     </div>
-    <div class="row padding-top-2" *ngFor="let matricule of tabMatricules">
+    <div class="row pt-4" *ngFor="let matricule of tabMatricules">
         <ng-container>
-            <div class="col"></div>
+            <div class="col">Matricule trouvé :</div>
             <div class="col">
-                <a href=# (click)="rechercherColl(matricule)">{{matricule}}</a>
+                <a class="list-group-item list-group-item-action" (click)="rechercherColl(matricule)">{{matricule}}</a>
             </div>
         </ng-container>
     </div>

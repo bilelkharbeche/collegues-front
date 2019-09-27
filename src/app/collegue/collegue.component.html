@@ -47,8 +47,7 @@
                 </div>
                 <div class="row align-items-start" *ngIf="!affichageModif">
                     <div class="col">
-                        <a for="exempleCreerColl" href="#" (click)="creerColl()">Créer
-                            un collègue</a>
+                        <button type="button" class="btn btn-dark" (click)="creerColl()">Créer un collègue</button>
                     </div>
                     <div class="col" *ngIf="collegue.matricule">
                         <button type="button" class="btn btn-danger" (click)="modifColl()">Modifier</button>
@@ -132,8 +131,8 @@
                         <li>Photo URL : </li>
                     </div>
                     <div class="col pb-2">
-                        <input type="text" name="newPhoto" [(ngModel)]="collegue.photoUrl" #photo=ngModel minlength="7" required>
-                        <p *ngIf="photo.invalid">Champs Obligatoire (avec 7 caractères minimum)</p>
+                        <input appUrlValidator type="text" name="newPhoto" [(ngModel)]="collegue.photoUrl" #photo=ngModel minlength="7" required>
+                        <p *ngIf="photo.invalid">L'url doit commencer par "http" et doit contenir 7 caractères minimum</p>
                     </div>
                     <p *ngIf="error">
                         <font color="red"><b>{{error}}</b></font>

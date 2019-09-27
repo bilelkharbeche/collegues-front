@@ -5,19 +5,16 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-root',
   template: `
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
-      <div class="col" *ngIf="estConnecte===false;">        
+    <div class="col" *ngIf="estConnecte===false;">        
         <app-authentification></app-authentification>
       </div>
     </div>
-    <div class="row" *ngIf="estConnecte===true">
-      <div class="col">
-        <app-recherche-collegue-par-nom></app-recherche-collegue-par-nom> 
-      </div>
-      <div class="col">
-        <app-collegue></app-collegue>
-      </div>      
+    <div *ngIf="estConnecte===true">
+    <app-menu-component></app-menu-component>
+      <router-outlet>        
+      </router-outlet>  
     </div>
   </div>
   `, 
