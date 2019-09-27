@@ -9,28 +9,60 @@ import { Subscription } from 'rxjs';
 })
 export class CollegueComponent implements OnInit {
 
-  collegue: Collegue;
-  affichage: boolean = true;
+  collegue: Collegue = new Collegue('', '','', null, '');
+  error: string;
+
+  affichageDefault: boolean = true;
+  affichageModif: boolean = false;
+  affichageCrea: boolean = false;  
   
   actionSub: Subscription;
 
   constructor(private datatService: DataService) { }
 
   ngOnInit() {
-    this.actionSub = this.datatService.actionInfoColl.subscribe(result => this.collegue = result);
+    this.actionSub = this.datatService.actionInfoColl.subscribe(result => {
+     if(result) {
+      this.collegue = result;
+     }
+    });
   }
 
   modifColl() {
-    console.log("Modification du collègue et oublie pas T MAUCH");
-    this.affichage = false;
+    this.affichageDefault = false;
+    this.affichageModif = true;
+    this.affichageCrea = false;
   }
 
   creerColl() {
-    console.log("Création d'un nouveau collègue MAUCH");
+    this.affichageDefault = false;
+    this.affichageModif = false;
+    this.affichageCrea = true; 
+
+    this.collegue = new Collegue('', '', '', null, '');
   }
 
-  valideModif() {
-    console.log("Modification validée");
-    this.affichage = true;
+  validCreerColl(nom: string, prenoms: string, dateNaiss: Date, email: string, photoUrl: string) {
+    this.collegue = new Collegue(nom, prenoms, email, new Date(dateNaiss), photoUrl);
+
+    this.datatService.valideCreerColl(this.collegue)
+    .subscribe(result => {
+    this.affichageDefault = true;
+    this.affichageModif = false;
+    this.affichageCrea = false;  
+    }, (err: any) =>{
+      this.error = err.error.message;
+    });  
+  }
+
+  valideModif(coll: Collegue) {
+    this.datatService.valideModif(coll)
+    .subscribe(result => {
+      this.affichageDefault = true;
+      this.affichageModif = false;
+      this.affichageCrea = false;
+    }, (err: any) =>{        
+        this.error = err.error.message;
+    });    
   }
 }

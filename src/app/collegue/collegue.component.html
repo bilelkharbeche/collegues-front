@@ -1,78 +1,152 @@
-<div class="container">    
-    <div class="row p-2">
-        <div class="col">
-            <img src={{collegue.photoUrl}}>
+<form>
+    <div class="container">
+        <div class="row pt-2" *ngIf="affichageModif || affichageDefault">
+            <div class="col">
+                <img src={{collegue.photoUrl}}>
+            </div>
+            <div class="col">
+                <div class="row padding-top-2 align-items-start">
+                    <div class="col">
+                        <li>Matricule : </li>
+                    </div>
+                    <div class="col">
+                        {{collegue.matricule}}
+                    </div>
+                </div>
+                <div class="row align-items-start">
+                    <div class="col">
+                        <li>Nom : </li>
+                    </div>
+                    <div class="col">
+                        {{collegue.nom | uppercase}}
+                    </div>
+                </div>
+                <div class="row align-items-start">
+                    <div class="col">
+                        <li>Prénoms : </li>
+                    </div>
+                    <div class="col">
+                        {{collegue.prenoms}}
+                    </div>
+                </div>
+                <div class="row align-items-start">
+                    <div class="col">
+                        <li>Date de naissance : </li>
+                    </div>
+                    <div class="col">
+                        {{collegue.dateDeNaissance | date:'dd/MM/yyyy'}}
+                    </div>
+                </div>
+                <div class="row align-items-start" *ngIf="affichageDefault">
+                    <div class="col">
+                        <li>Email : </li>
+                    </div>
+                    <div class="col">
+                        <label>{{collegue.email}}</label>
+                    </div>
+                </div>
+                <div class="row align-items-start" *ngIf="!affichageModif">
+                    <div class="col">
+                        <a for="exempleCreerColl" href="#" (click)="creerColl()">Créer
+                            un collègue</a>
+                    </div>
+                    <div class="col" *ngIf="collegue.matricule">
+                        <button type="button" class="btn btn-danger" (click)="modifColl()">Modifier</button>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col">            
-            <div class="row padding-top-2 align-items-start">
-                <div class="col">
-                    <li>Matricule : </li>
-                </div>
-                <div class="col">
-                    {{collegue.matricule}}
-                </div>
-            </div>
-            <div class="row align-items-start">
-                <div class="col">
-                    <li>Nom : </li>
-                </div>
-                <div class="col">
-                    {{collegue.nom | uppercase}}
-                </div>
-            </div>
-            <div class="row align-items-start">
-                <div class="col">
-                    <li>Prénoms : </li>
-                </div>
-                <div class="col">
-                    {{collegue.prenoms}}
-                </div>
-            </div>
-            <div class="row align-items-start">
-                <div class="col">
-                    <li>Date de naissance : </li>
-                </div>
-                <div class="col">
-                    {{collegue.dateDeNaissance | date:'dd/MM/yyyy'}}
-                </div>
-            </div>
+
+        <ng-container *ngIf="affichageModif">
             <div class="row align-items-start">
                 <div class="col">
                     <li>Email : </li>
                 </div>
                 <div class="col">
-                    <div *ngIf="affichage; else elseAffMail">{{collegue.email}}</div>
+                    <input type="email" name="emailModif" [(ngModel)]="collegue.email" #mailModif="ngModel" required>
+                    <p *ngIf="mailModif.invalid">Champs obligatoire</p>
                 </div>
-            </div>            
-            <div class="row padding-top-2 align-items-start">
-                <div class="col" *ngIf="affichage; else elseAffUrl"></div>
-                <div class="col" *ngIf="affichage; else elseChampsUrl"></div>
             </div>
             <div class="row align-items-start">
                 <div class="col">
-                    <a *ngIf="affichage; else elseLienCreer" for="exempleCreerColl" href="#" (click)="creerColl()">Créer
-                        un collègue</a>
+                    <li>Photo URL : </li>
                 </div>
                 <div class="col">
-                    <button *ngIf="affichage; else elseBtnModif" type="button" class="btn btn-danger"
-                        (click)="modifColl()">Modifier</button>
+                    <input type="text" name="photoUrlModif" [(ngModel)]="collegue.photoUrl" #urlPhotoModif="ngModel"
+                        minlength="7" required>
+                    <p *ngIf="urlPhotoModif.invalid">Champs Invalide (7 caractères minimum)</p>
+                    <p *ngIf="error">
+                        <font color="red"><b>{{error}}</b></font>
+                    </p>
+                    <div class="row align-items-start pt-2">
+                        <button type="button" class="btn btn-danger"
+                            [disabled]="mailModif.invalid || urlPhotoModif.invalid"
+                            (click)="valideModif(collegue)">Valider</button>
+                    </div>
                 </div>
             </div>
-        </div>               
-    </div>    
-    <div class="row padding-top-2">C'est classe de passer d'un truc mauch à ça hein ? :)<br>TAPE "KHARBECHE" OU "KHARBECHE2" DANS LA RECHERCHE !</div> 
+        </ng-container>
 
-    <ng-template #elseAffMail><input type="email"></ng-template>
-    <ng-template #elseAffUrl>
-        <div class="col">
-            <li>Photo URL :</li><br>
+        <div class="row align-items-start pt-2" *ngIf="affichageCrea">
+            <div class="col">
+                <div class="row align-items-start pt-2">
+                    <div class="col pb-2">
+                        <li>Nom : </li>
+                    </div>
+                    <div class="col pb-2">
+                        <input type="texte" name="newNom" [(ngModel)]="collegue.nom" #nom=ngModel minlength="2"
+                            required>
+                        <p *ngIf="nom.invalid">Champs Obligatoire (avec minimum 2 caractères)</p>
+                    </div>
+                </div>
+                <div class="row align-items-start">
+                    <div class="col">
+                        <li>Prénoms : </li>
+                    </div>
+                    <div class="col pb-2">
+                        <input type="text" name="newPrenoms" [(ngModel)]="collegue.prenoms" #prenoms=ngModel
+                            minlength="2" required>
+                        <p *ngIf="prenoms.invalid">Champs Obligatoire (avec minimum 2 caractères)</p>
+                    </div>
+                </div>
+                <div class="row align-items-start">
+                    <div class="col">
+                        <li>Date de naissance : </li>
+                    </div>
+                    <div class="col pb-2">
+                        <input type="date" name="newDate" [(ngModel)]="collegue.dateDeNaissance" #date=ngModel   required>
+                        <p *ngIf="date.invalid">Champs Obligatoire</p>
+                    </div>
+                </div>
+                <div class="row align-items-start">
+                    <div class="col pb-2">
+                        <li>Email : </li>
+                    </div>
+                    <div class="col">
+                        <input type="email" name="newMail" [(ngModel)]="collegue.email" #eMail=ngModel required>
+                        <p *ngIf="eMail.invalid">Champs Obligatoire</p>
+                    </div>
+                </div>
+                <div class="row align-items-start">
+                    <div class="col pb-2">
+                        <li>Photo URL : </li>
+                    </div>
+                    <div class="col pb-2">
+                        <input type="text" name="newPhoto" [(ngModel)]="collegue.photoUrl" #photo=ngModel minlength="7" required>
+                        <p *ngIf="photo.invalid">Champs Obligatoire (avec 7 caractères minimum)</p>
+                    </div>
+                    <p *ngIf="error">
+                        <font color="red"><b>{{error}}</b></font>
+                    </p>
+                </div>
+                <div class="row align-items-start">
+                    <div class="col">
+                        <button type="button" class="btn btn-danger"
+                            [disabled]="nom.invalid || prenoms.invalid || date.invalid || eMail.invalid || photo.invalid"
+                            (click)="validCreerColl(collegue.nom, collegue.prenoms, collegue.dateDeNaissance, collegue.email, collegue.photoUrl)">Valider</button>
+                    </div>
+                </div>
+            </div>
         </div>
-    </ng-template>
-    <ng-template #elseChampsUrl>
-        <div class="col"><input type="text"></div>
-    </ng-template>
-    <ng-template #elseLienCreer></ng-template>
-    <ng-template #elseBtnModif><button type="button" class="btn btn-danger" (click)="valideModif()">Valider</button>
-    </ng-template>
-
-</div>
+    </div>
+</form>

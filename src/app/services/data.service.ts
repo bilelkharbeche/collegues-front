@@ -1,11 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Collegue } from '../models/Collegue';
-import { tabMatricules } from '../mock/matricules.mock';
-import { newColl } from '../mock/collegues.mock';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { HttpHeaders } from "@angular/common/http"; 
-import { EMPTY_PARSE_LOCATION } from '@angular/compiler';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators'; 
 
@@ -45,7 +42,6 @@ export class DataService {
         email: email,
         motDePasse: mdp
       },
-
       httpOptions
     )
     .subscribe((data:any) => {
@@ -53,6 +49,45 @@ export class DataService {
     }, (error: HttpErrorResponse) => {
       console.log("error", error);
     });
+  }
+
+  valideCreerColl(coll: Collegue) {
+    const URL_BACKEND = environment.backendUrl + '/collegues';
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json"
+      }),
+      withCredentials: true
+    };
+
+      return this._http.post(URL_BACKEND,{
+      nom: coll.nom,
+      prenoms: coll.prenoms,
+      dateDeNaissance: coll.dateDeNaissance,
+      email: coll.email,
+      photoUrl: coll.photoUrl
+    },    
+      httpOptions
+    );    
+  }
+
+  valideModif(coll: Collegue) {
+    const URL_BACKEND = environment.backendUrl + '/collegues/' + coll.matricule;
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json"
+      }),
+      withCredentials: true
+    };
+
+    return this._http.patch(URL_BACKEND,{
+      email: coll.email,
+      photoUrl: coll.photoUrl
+    },
+    httpOptions
+    );
   }
 
   rechercherParNom(nom: string): Observable<string[]> {
@@ -67,7 +102,6 @@ export class DataService {
     return this._http.get<Collegue>(URL_BACKEND, { withCredentials: true }).pipe(
       tap(infos => {
         this.infoColl.next(infos);
-        console.log(infos);
       })
     );
   }

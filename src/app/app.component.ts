@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { newColl } from './mock/collegues.mock';
 import { DataService } from './services/data.service';
 import { Subscription } from 'rxjs';
 
@@ -27,11 +26,11 @@ import { Subscription } from 'rxjs';
 export class AppComponent {
   title = 'collegues-front'; 
   
-  estConnecte: boolean; 
+  estConnecte: boolean;
   actionSub: Subscription;
 
   constructor(private dataService: DataService) {
-    this.actionSub = this.dataService.actionEstCo.subscribe(result => this.estConnecte = result);
+    this.actionSub = this.dataService.actionEstCo.subscribe(result => this.estConnecte = result);    
   }
 
   ngOnDestroy() {     
