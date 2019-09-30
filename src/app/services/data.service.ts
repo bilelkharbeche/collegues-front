@@ -27,7 +27,7 @@ export class DataService {
     return this.infoColl.asObservable();
   }
 
-  connexion(email: string, mdp: string) {
+  connexion(email: string, mdp: string): Observable<void|object> {
     const URL_BACKEND = environment.backendUrl + '/auth';
 
     const httpOptions = {
@@ -37,19 +37,17 @@ export class DataService {
       withCredentials: true
     };
 
-    this._http.post(URL_BACKEND,
+     return this._http.post(URL_BACKEND,
       {
         email: email,
         motDePasse: mdp
       },
       httpOptions
     )
-    .subscribe((data:any) => {
-      this.estConnecte.next(true);
-    }, (error: HttpErrorResponse) => {
-      console.log("error", error);
-    });
+    .pipe(
+      tap(data => {this.estConnecte.next(true)}))
   }
+      
 
   valideCreerColl(coll: Collegue) {
     const URL_BACKEND = environment.backendUrl + '/collegues';
@@ -112,4 +110,9 @@ export class DataService {
     return this._http.get<Collegue[]>(URL_BACKEND, { withCredentials: true});
   }
 
+  isLoggedIn(): Observable<string> {
+    const URL_BACKEND = environment.backendUrl + '/auth/user';
+
+    return this._http.get(URL_BACKEND, { withCredentials: true, responseType: 'text'});
+  }
 }

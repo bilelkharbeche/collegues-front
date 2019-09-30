@@ -5,32 +5,24 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-root',
   template: `
-  <div class="container-fluid">
-    <div class="row">
-    <div class="col" *ngIf="estConnecte===false;">        
-        <app-authentification></app-authentification>
-      </div>
-    </div>
-    <div *ngIf="estConnecte===true">
+  <div class="container-fluid">   
     <app-menu-component></app-menu-component>
-      <router-outlet>        
-      </router-outlet>  
-    </div>
+    <router-outlet></router-outlet>     
   </div>
-  `, 
+  `,
   styles: []
 })
 export class AppComponent {
-  title = 'collegues-front'; 
-  
+  title = 'collegues-front';
+
   estConnecte: boolean;
   actionSub: Subscription;
 
   constructor(private dataService: DataService) {
-    this.actionSub = this.dataService.actionEstCo.subscribe(result => this.estConnecte = result);    
+    this.actionSub = this.dataService.actionEstCo.subscribe(result => this.estConnecte = result);
   }
 
-  ngOnDestroy() {     
+  ngOnDestroy() {
     this.actionSub.unsubscribe();
   }
 }
