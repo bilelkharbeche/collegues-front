@@ -1,1 +1,9 @@
-<p>galerie works!</p>
+<div class="container">
+    <div class="row pt-4">
+        <div class="col-3" *ngFor="let collegue of tabCol">
+            <div>
+                <a routerLink="/galerie/{{collegue.matricule}}"><img src="{{collegue.photoUrl}}" class="img-fluid"></a>
+            </div>
+        </div>
+    </div>
+</div>

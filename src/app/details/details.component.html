@@ -1,0 +1,49 @@
+<div class="container">
+    <div class="row pt-2">
+        <div class="col">
+            <img src={{collegue.photoUrl}}>
+        </div>
+        <div class="col">
+            <div class="row padding-top-2 align-items-start">
+                <div class="col">
+                    <li>Matricule : </li>
+                </div>
+                <div class="col">
+                    {{collegue.matricule}}
+                </div>
+            </div>
+            <div class="row align-items-start">
+                <div class="col">
+                    <li>Nom : </li>
+                </div>
+                <div class="col">
+                    {{collegue.nom | uppercase}}
+                </div>
+            </div>
+            <div class="row align-items-start">
+                <div class="col">
+                    <li>Prénoms : </li>
+                </div>
+                <div class="col">
+                    {{collegue.prenoms}}
+                </div>
+            </div>
+            <div class="row align-items-start">
+                <div class="col">
+                    <li>Date de naissance : </li>
+                </div>
+                <div class="col">
+                    {{collegue.dateDeNaissance | date:'dd/MM/yyyy'}}
+                </div>
+            </div>
+            <div class="row align-items-start">
+                <div class="col">
+                    <li>Email : </li>
+                </div>
+                <div class="col">
+                    <label>{{collegue.email}}</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

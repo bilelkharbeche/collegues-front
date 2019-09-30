@@ -13,6 +13,7 @@ import { AProposComponent } from './a-propos/a-propos.component';
 import { GalerieComponent } from './galerie/galerie.component';
 import { ROUTES } from './app.routes';
 import { RouterModule } from '@angular/router';
+import { DetailsComponent } from './details/details.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { RouterModule } from '@angular/router';
     MenuComponentComponent,
     AccueilComponent,
     AProposComponent,
-    GalerieComponent
+    GalerieComponent,   
+    DetailsComponent 
   ],
   imports: [
     BrowserModule,

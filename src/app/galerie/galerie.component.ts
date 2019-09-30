@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { DataService } from '../services/data.service';
+import { Collegue } from '../models/Collegue';
 
 @Component({
   selector: 'app-galerie',
@@ -7,9 +10,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GalerieComponent implements OnInit {
 
-  constructor() { }
+  collegue: Collegue;
+
+  actionSub: Subscription;
+  tabCol: Collegue[] = [];
+
+  constructor(private dataService: DataService) { }
 
   ngOnInit() {
+    this.actionSub = this.dataService.afficherPhoto().subscribe(tab => this.tabCol = tab);
+  }
+
+  rechercherColl(matricule: string) {
+    this.dataService.recupererCollegueCourant(matricule).subscribe(coll => this.collegue = coll);
   }
 
 }

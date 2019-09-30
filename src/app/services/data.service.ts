@@ -106,4 +106,10 @@ export class DataService {
     );
   }
 
+  afficherPhoto(): Observable<Collegue[]> {
+    const URL_BACKEND = environment.backendUrl + '/collegues/photos';
+
+    return this._http.get<Collegue[]>(URL_BACKEND, { withCredentials: true});
+  }
+
 }
